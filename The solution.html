@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solution - Your All-in-One Student Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .feature-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .content-section {
+            background: #f8f9fa;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .signup-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('learn-more')">Learn More</a></li>
+            <li><a href="#" onclick="showPage('explore')">Explore</a></li>
+            <li><a href="#" onclick="showPage('about')">About Us</a></li>
+            <li><a href="#" onclick="showPage('signup')">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Welcome to The Solution</h1>
+            <p>Your complete platform for academic success and personal growth</p>
+            <a href="#" onclick="showPage('signup')" class="cta-button">Get Started Today</a>
+        </div>
+        
+        <div class="container">
+            <h2>Everything You Need in One Place</h2>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem; color: #666;">
+                The Solution brings together powerful tools designed specifically for students who want to excel academically while developing essential life skills.
+            </p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-number">1</div>
+                    <h3>Daily Planner & Calendar</h3>
+                    <p>Stay organized with our intuitive task management system. Create custom tasks, set deadlines, and track your progress with an integrated calendar that keeps you on schedule.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">2</div>
+                    <h3>Exam Preparation Hub</h3>
+                    <p>Get comprehensive guidance on how to prepare for your exams. Access past papers, practice questions, and tailored study strategies for the specific exams you're targeting.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">3</div>
+                    <h3>Life Skills Academy</h3>
+                    <p>Learn essential life skills including cooking, drawing, and confident speaking. Our interactive lessons help you develop abilities that extend far beyond the classroom.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learn More Page -->
+    <div id="learn-more" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Discover Our Features</h1>
+            <p>Explore how The Solution can transform your student experience</p>
+        </div>
+        
+        <div class="container content-section">
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-number">4</div>
+                    <h3>Smart Note Transformation</h3>
+                    <p>Transform your teacher's notes or personal study materials into visually stunning diagrams. Our intelligent system converts text into beautiful, easy-to-understand visual representations that enhance learning and retention.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">5</div>
+                    <h3>AI-Powered Note Analysis</h3>
+                    <p>Upload your notes and let our advanced system analyze and summarize the key points. Ask questions about your material anytime during your learning journey and get instant, accurate responses.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">6</div>
+                    <h3>Student Discount Network</h3>
+                    <p>Access exclusive deals on food, services, and essentials. We partner with local businesses and online platforms to bring you significant savings on everyday expenses, helping you manage your budget more effectively.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#" onclick="showPage('signup')" class="cta-button">Start Your Free Trial</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explore Page -->
+    <div id="explore" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Explore The Solution</h1>
+            <p>See what makes us different from other student platforms</p>
+        </div>
+        
+        <div class="container">
+            <h2>Why Choose The Solution?</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>📚 Comprehensive Learning</h3>
+                    <p>We combine academic tools with life skills training, ensuring you develop as a well-rounded individual ready to tackle any challenge.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🎯 Personalized Experience</h3>
+                    <p>Every feature adapts to your specific needs and learning style. Whether you're preparing for exams or learning to cook, we tailor the experience to you.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>💰 Cost-Effective</h3>
+                    <p>Not only do we provide premium tools at an affordable price, but we also help you save money through our extensive student discount network.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📱 Always Accessible</h3>
+                    <p>Access your planner, notes, and learning materials from any device, anywhere. Your progress syncs automatically across all platforms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🤖 Smart Technology</h3>
+                    <p>Our AI-powered features help you study smarter, not harder. From note analysis to visual diagrams, technology works for you.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🌟 Proven Results</h3>
+                    <p>Students using The Solution report better time management, improved exam performance, and increased confidence in both academic and personal pursuits.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Page -->
+    <div id="about" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>About The Solution</h1>
+            <p>Empowering students to achieve their full potential</p>
+        </div>
+        
+        <div class="container content-section">
+            <div class="about-content">
+                <h2>Our Mission</h2>
+                <p>The Solution was created with a simple yet powerful goal: to provide students with everything they need to succeed, all in one accessible platform. We understand that being a student today means juggling academic responsibilities, personal development, and financial constraints.</p>
+                
+                <p style="margin-top: 2rem;">We believe that success comes from combining strong organizational skills, comprehensive exam preparation, practical life abilities, and smart financial management. That's why we've built a platform that addresses all these areas, helping you not just survive as a student, but truly thrive.</p>
+                
+                <p style="margin-top: 2rem;">Our team is dedicated to continuously improving The Solution based on student feedback and educational research. We're committed to being more than just another app – we're your partner in achieving academic excellence and personal growth.</p>
+                
+                <div style="margin-top: 3rem;">
+                    <a href="#" onclick="showPage('signup')" class="cta-button">Join Our Community</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Join The Solution</h1>
+            <p>Start your journey to success today</p>
+        </div>
+        
+        <div class="container content-section">
+            <form class="signup-form" onsubmit="handleSignup(event)">
+                <h2 style="margin-bottom: 2rem;">Create Your Account</h2>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="your.email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="institution">School/University</label>
+                    <input type="text" id="institution" required placeholder="Your institution name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Create a strong password">
+                </div>
+                
+                <button type="submit" class="submit-button">Sign Up Free</button>
+                
+                <p style="text-align: center; margin-top: 1.5rem; color: #666;">
+                    Already have an account? <a href="#" style="color: #667eea; text-decoration: none;">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 The Solution. All rights reserved. | Empowering students worldwide</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            alert('Thank you for signing up! Your account has been created successfully.');
+            document.querySelector('.signup-form').reset();
+        }
+    </script>
+</body>
+</html>
